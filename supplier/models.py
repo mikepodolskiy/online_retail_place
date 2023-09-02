@@ -53,7 +53,7 @@ class Supplier(DateModelMixin):
         distributor = 1, "Реализатор первого уровня"
         seller = 2, "Реализатор второго уровня"
 
-    title = models.CharField(max_length=255, **NULLABLE, verbose_name="название")
+    title = models.CharField(max_length=255, verbose_name="название")
     contacts = models.ForeignKey("Contacts", verbose_name="контакты", on_delete=models.PROTECT)
     product = models.ForeignKey("Product", verbose_name="продукт", on_delete=models.PROTECT)
     supplier = models.SmallIntegerField(choices=Status.choices, default=Status.seller, verbose_name="поставщик")
