@@ -16,11 +16,9 @@ class SupplierAdmin(admin.ModelAdmin):
     # list of fields to show in admin panel for supplier
     list_display = ("title", "contacts", "product", "supplier", "debt")
     # list of fields to show to be hyperlinks to object
-    list_display_links = ("supplier", )
+    list_display_links = ("supplier",)
     # filter for admin panel (using lookups to get object's field (city))
-    list_filter = ("contacts__city", )
-
-
+    list_filter = ("contacts__city",)
 
 
 @admin.register(Contacts)
