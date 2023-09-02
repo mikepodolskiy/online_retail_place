@@ -9,7 +9,7 @@ class DateModelMixin(models.Model):
 
     def save(self, *args, **kwargs) -> None:
         """
-        method to fill created (if no id yet)
+        method to fill created_at for new objects (if no id yet)
         """
         if not self.id:
             self.created = timezone.now()
@@ -30,9 +30,9 @@ class Contacts(models.Model):
         verbose_name = "Контакты"
         verbose_name_plural = "Контакты"
 
-
     def __str__(self):
         return f"г. {self.city}, {self.street}, {self.building_number}"
+
 
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name="название")
@@ -55,7 +55,7 @@ class Supplier(DateModelMixin):
 
     title = models.CharField(max_length=255, **NULLABLE, verbose_name="название")
     contacts = models.ForeignKey("Contacts", verbose_name="контакты", on_delete=models.PROTECT)
-    product = models.ManyToManyField("Product", verbose_name="продукт")
+    product = models.ForeignKey("Product", verbose_name="продукт", on_delete=models.PROTECT)
     supplier = models.SmallIntegerField(choices=Status.choices, default=Status.seller, verbose_name="поставщик")
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="задолженность")
 
